@@ -4,7 +4,7 @@
   "description": "advance calculator",
   "main": "index.js",
   "scripts": {
-    "test": "npm test",
+    "test": "jest",
     "start": "node interface/server.js"
   },
   "author": "",
@@ -12,5 +12,8 @@
   "dependencies": {
     "express": "^4.17.0",
     "yargs": "^13.2.4"
+  },
+  "devDependencies": {
+    "jest": "^24.8.0"
   }
 }
