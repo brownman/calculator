@@ -12,8 +12,8 @@ calculate expression:
 
 DONE
 ------
-cli interface: npm run cli:help
-web interface: npm run server
+- cli interface: npm run cli:help
+- web interface: npm run server
 
 
 
