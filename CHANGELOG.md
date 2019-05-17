@@ -1,10 +1,19 @@
-version 0.0.4
+version 0.0.5
 
-basic http server: interface/server.js] 
-- url: /calculate?phrase=??
-
+code base:
+---
 basic calc: src/calculator.js
-- methods: process
+- method: process
 
-basic cli interface: interface/cli.js
-- cli interaction: interface/cli.js --help
+interfaces:
+-----
+* Web interface: 
+- npm server
+- url: /calculate?phrase=3*5
+
+* Cli interface: 
+- interface/cli.js --help
+- Example: interface/cli.js calculate '3*5'
+
+* Testing:
+- npm test
