@@ -1,13 +1,17 @@
+** calculator
 
-TODO:
+
+TODO
 ---
-1. basic calculator
+1. tokenizer
+
+DONE
+------
+1. calculator stab
 
 2. cli interface
 
 3. web interface
 
-4. testing for the calculator
-
-5. advance calculator
+4. testing suite
 
