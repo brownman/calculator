@@ -1,6 +1,10 @@
+version 0.0.3
 
+basic http server: interface/server.js] 
+- url: /calculate?phrase=??
 
-version 0.0.1
-basic calc is working: src/calculator.js
-basic cli interface is working: interface/cli.js
+basic calc: src/calculator.js
+- methods: process
 
+basic cli interface: interface/cli.js
+- TODO: cli interaction 

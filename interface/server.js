@@ -1,3 +1,4 @@
+const calculator = require('../src/calculator.js')
 const express = require('express')
 const app = express()
 const port = 3000
@@ -15,7 +16,9 @@ app.get('/about', function (req, res) {
 })
 
 app.get('/calculate', function (req, res) {
-  res.send('here is the calculator');
+  var phrase = req.query.phrase;
+  var sum = calculator.process(phrase);
+  res.send('here is the calculator: ' + phrase );
 })
 
 

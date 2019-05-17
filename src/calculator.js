@@ -1,18 +1,29 @@
 'use strict'
 
-console.log('start');
+console.log('..calculating..');
+
 
 var calculator = {
 	multiply: function(a,b) {
-	var res=a*b;
-	return res;
+		var res=a*b;
+		return res;
 	},
 	divide: function(a,b){
-	var res=a/b;
-	return res;
+		var res=a/b;
+		return res;
+	},
+
+/**
+ * A function to process the math expression
+ *
+ * We assume that the expression is a sequence of number and math operators
+ *
+ * @param {string} expr - The string which represents a math expression 
+ * @return {string} The expression's result
+ */
+	process: function(expr){
+		return 'hello ' + expr;
 	}
 }
-module.exports=calculator;
 
-//var res=calculator.multiply(4,5);
-//console.log(res);
+module.exports=calculator;

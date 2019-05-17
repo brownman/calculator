@@ -4,7 +4,8 @@
   "description": "advance calculator",
   "main": "index.js",
   "scripts": {
-    "test": "npm test"
+    "test": "npm test",
+    "start": "node interface/server.js"
   },
   "author": "",
   "license": "ISC",
