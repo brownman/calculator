@@ -1,20 +1,18 @@
 calculator
 ---
-
-
+- evaluate string expression as math expression.
 
 
 TODO
 ---
-1. tokenizer
+calculate expression:
+- add tokenizer
+- add parse 
+- add evaluator 
 
 DONE
 ------
-1. calculator stab
+cli interface: npm run cli:help
+web interface: npm run server
 
-2. cli interface
-
-3. web interface
-
-4. testing suite
 

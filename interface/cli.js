@@ -5,7 +5,7 @@ const calc=require('../src/calculator.js');
 require('yargs')
 	.scriptName("cli")
 	.usage('$0 <cmd> [args]')
-	.command('calculator [expression]','', (yargs) => {
+	.command('calculate [expression]','', (yargs) => {
 		yargs.positional('expression', {
 			type: 'string',
 			default: '42',

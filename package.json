@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "node interface/server.js"
+    "cli": "node interface/cli.js calculate",
+    "cli:help": "node interface/cli.js --help",
+    "server": "node interface/server.js"
   },
   "author": "",
   "license": "ISC",
