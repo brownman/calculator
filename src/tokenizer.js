@@ -1,6 +1,5 @@
 'use strict'
 
-var tokenizer = {};
 
 function Token(type, value) {
 	this.type = type;
@@ -103,8 +102,9 @@ function process(str) {
 
 }
 
-tokenizer = {
-	process: process
+var tokenizer = {
+	process: process,
+	Token: Token
 }
 
 module.exports = tokenizer;

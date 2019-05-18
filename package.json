@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "cli": "node interface/cli.js calculate",
+    "cli:tokenize": "node interface/cli.js tokenize",
+    "cli:rpn": "node interface/cli.js rpn",
     "cli:help": "node interface/cli.js --help",
     "server": "node interface/server.js"
   },

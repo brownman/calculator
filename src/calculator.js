@@ -1,17 +1,10 @@
 'use strict'
 const tokenizer = require('./tokenizer.js');
+const rpn = require('./rpn.js');
+const ast = require('./ast.js');
 console.log('..calculating..');
 
 var calculator = {
-	multiply: function(a,b) {
-		var res=a*b;
-		return res;
-	},
-	divide: function(a,b){
-		var res=a/b;
-		return res;
-	},
-
 	/**
 	 * A function to process the math expression
 	 *
@@ -20,9 +13,17 @@ var calculator = {
 	 * @param {string} expr - The string which represents a math expression 
 	 * @return {string} The expression's result
 	 */
-	process: function(expr){
+	tokenize: function(expr){
 		return tokenizer.process(expr);
+	},
+	rpn: function(expr){
+		return rpn.process(expr);
+	},
+	ast: function(expr){
+		return ast.process(expr);
 	}
+
+
 }
 
 module.exports=calculator;
