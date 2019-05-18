@@ -2,25 +2,6 @@ calculator
 ---
 - evaluate string expression as math expression.
 
-WORK-FLOW
----------
-1 - describe in words before coding
-2 - implement the basic code-base -> test from the cli -> add test suite -> extend the code-base
-
-PRIORITIES
-----
-- tokenizer 
--- buffer (support sequance of digits-symbols)
---- digits: +1, +1.0, -1.00-0...-+.,.-0
---- operators: *,/,///,**,/**/,******
-
-TODO
----
-- calculate expression:
--- add tokenizer
--- add parse 
--- add evaluator 
-
 DONE
 ------
 - cli interface: npm run cli:help
@@ -47,5 +28,5 @@ npm run server
 #web
 npm run server
 #then access
-#http://localhost:3000/calculate?phrase=4*-2
+#http://localhost:3000
 ```
