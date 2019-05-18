@@ -40,12 +40,12 @@ npm run cli:rpn "5/3*9"
 npm run cli:ast "5/3*9"
 
 #user
-npm run cli:calculate '4/2-2-1*8'
+npm run cli:calculate '6/2'
 npm test
 npm run server
 
 #web
 npm run server
 #then access
-#http://localhost:3000/calculate?phrase=4*2^3
+#http://localhost:3000/calculate?phrase=4*-2
 ```

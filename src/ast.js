@@ -19,19 +19,16 @@ ASTNode.prototype.toString = function(count) {
 
 function travel(inp){
 	//console.log(inp);
-	if (inp.leftChildNode == null && inp.rightChildNode == null) 
+	if (inp == null || typeof inp === undefined)
+		return inp;
+
+	if (inp && inp.leftChildNode == null && inp.rightChildNode == null) 
 		return Number(inp.token);
 
 	switch(inp.token) {
-		case '^':
-			return travel(inp.leftChildNode) ** travel(inp.rightChildNode);
 		case '*':
 			return travel(inp.leftChildNode) * travel(inp.rightChildNode);
 		case '/':
-			return travel(inp.leftChildNode) / travel(inp.rightChildNode);
-		case '+':
-			return travel(inp.leftChildNode) + travel(inp.rightChildNode);
-		case '-':
 			return travel(inp.leftChildNode) - travel(inp.rightChildNode);
 		default:
 			return null;

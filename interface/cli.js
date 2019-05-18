@@ -8,7 +8,7 @@ require('yargs')
 	.command('tokenize [expression]','', (yargs) => {
 		yargs.positional('expression', {
 			type: 'string',
-			default: '42',
+			default: '',
 			describe: 'the math expression to process'
 		})
 	}, function (argv) {
@@ -18,7 +18,7 @@ require('yargs')
 	.command('rpn [expression]','', (yargs) => {
 		yargs.positional('expression', {
 			type: 'string',
-			default: '42',
+			default: '',
 			describe: 'the math expression to process'
 		})
 	}, function (argv) {
@@ -28,7 +28,7 @@ require('yargs')
 	.command('ast [expression]','', (yargs) => {
 		yargs.positional('expression', {
 			type: 'string',
-			default: '42',
+			default: '',
 			describe: 'the math expression to process'
 		})
 	}, function (argv) {
@@ -41,7 +41,7 @@ require('yargs')
 	.command('calculate [expression]','', (yargs) => {
 		yargs.positional('expression', {
 			type: 'string',
-			default: '42',
+			default: '',
 			describe: 'the math expression to process'
 		})
 	}, function (argv) {
