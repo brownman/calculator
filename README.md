@@ -16,10 +16,9 @@ npm run cli:tokenize "5/3*9"
 npm run cli:rpn "5/3*9"
 npm run cli:ast "5/3*9"
 
-#user
+#CLI user
 npm run cli:calculate '6/2'
 npm test
-npm run server
 
 #web
 npm run server
