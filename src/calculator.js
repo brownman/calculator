@@ -1,7 +1,6 @@
 'use strict'
-
+const tokenizer = require('./tokenizer.js');
 console.log('..calculating..');
-
 
 var calculator = {
 	multiply: function(a,b) {
@@ -13,16 +12,16 @@ var calculator = {
 		return res;
 	},
 
-/**
- * A function to process the math expression
- *
- * We assume that the expression is a sequence of number and math operators
- *
- * @param {string} expr - The string which represents a math expression 
- * @return {string} The expression's result
- */
+	/**
+	 * A function to process the math expression
+	 *
+	 * We assume that the expression is a sequence of number and math operators
+	 *
+	 * @param {string} expr - The string which represents a math expression 
+	 * @return {string} The expression's result
+	 */
 	process: function(expr){
-		return 'hello ' + expr;
+		return tokenizer.process(expr);
 	}
 }
 
