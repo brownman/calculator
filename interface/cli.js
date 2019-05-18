@@ -33,8 +33,23 @@ require('yargs')
 		})
 	}, function (argv) {
 		var sum=calc.ast(argv.expression);
-		console.log('The expression: ', argv.expression, 'is evaluated to: ',sum)
+		console.log('\nThe expression: ', argv.expression, 'is evaluated to: ')
+		console.log(sum);
+		console.log('\nAST draw:')
+		console.log("" + sum);
 	})
+	.command('calculate [expression]','', (yargs) => {
+		yargs.positional('expression', {
+			type: 'string',
+			default: '42',
+			describe: 'the math expression to process'
+		})
+	}, function (argv) {
+		var sum=calc.calculate(argv.expression);
+		console.log(sum);
+	})
+
+
 
 
 	.help()

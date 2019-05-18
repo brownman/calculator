@@ -7,6 +7,8 @@
     "test": "jest",
     "cli:tokenize": "node interface/cli.js tokenize",
     "cli:rpn": "node interface/cli.js rpn",
+    "cli:ast": "node interface/cli.js ast",
+    "cli:calculate": "node interface/cli.js calculate",
     "cli:help": "node interface/cli.js --help",
     "server": "node interface/server.js"
   },

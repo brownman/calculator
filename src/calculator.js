@@ -21,7 +21,11 @@ var calculator = {
 	},
 	ast: function(expr){
 		return ast.process(expr);
+	},
+	calculate: function(expr){
+		return ast.calculate(expr);
 	}
+
 
 
 }

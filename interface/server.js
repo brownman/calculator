@@ -17,8 +17,8 @@ app.get('/about', function (req, res) {
 
 app.get('/calculate', function (req, res) {
   var phrase = req.query.phrase;
-  var sum = calculator.process(phrase);
-  res.send('here is the calculator: ' + phrase );
+  var sum = calculator.calculate(phrase);
+  res.send('The ultimate answer to the universe and everything: ' + sum);
 })
 
 

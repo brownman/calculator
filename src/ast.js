@@ -9,6 +9,41 @@ function ASTNode(token, leftChildNode, rightChildNode) {
 	this.rightChildNode = rightChildNode;
 }
 
+ASTNode.prototype.toString = function(count) {
+	if (!this.leftChildNode && !this.rightChildNode)
+		return this.token + "\t=>null\n" + Array(count+1).join("\t") + "=>null";
+	var count = count || 1;
+	count++;
+	return this.token + "\t=>" + this.leftChildNode.toString(count) + "\n" + Array(count).join("\t") + "=>" + this.rightChildNode.toString(count);
+};
+
+function travel(inp){
+	//console.log(inp);
+	if (inp.leftChildNode == null && inp.rightChildNode == null) 
+		return Number(inp.token);
+
+	switch(inp.token) {
+		case '^':
+			return travel(inp.leftChildNode) ** travel(inp.rightChildNode);
+		case '*':
+			return travel(inp.leftChildNode) * travel(inp.rightChildNode);
+		case '/':
+			return travel(inp.leftChildNode) / travel(inp.rightChildNode);
+		case '+':
+			return travel(inp.leftChildNode) + travel(inp.rightChildNode);
+		case '-':
+			return travel(inp.leftChildNode) - travel(inp.rightChildNode);
+		default:
+			return null;
+	} 
+}
+
+
+function calculate(inp){
+	var ast_tree = parse(inp);
+	var res = travel(ast_tree);
+	return res;
+}
 
 function parse(inp){
 	var outStack=[];
@@ -43,7 +78,7 @@ function parse(inp){
 	Token.prototype.precedence = function() {
 		return prec[this.value];
 	};
-	
+
 	Token.prototype.associativity = function() {
 		return assoc[this.value];
 	};
@@ -66,7 +101,7 @@ function parse(inp){
 			while(opStack.peek()
 				&& opStack.peek().type !== "Left Parenthesis") {
 				outStack.addNode(opStack.pop());
-		}
+			}
 			/*if(opStack.length == 0){
 				console.log("Mismatched parentheses");
 				return;
@@ -74,18 +109,18 @@ function parse(inp){
 		} 
 		//If the token is an operator, o1, then:
 		else if(v.type == "Operator") {
-			  //while there is an operator token o2, at the top of the operator stack and either
-			  while (opStack.peek() && (opStack.peek().type === "Operator") 
+			//while there is an operator token o2, at the top of the operator stack and either
+			while (opStack.peek() && (opStack.peek().type === "Operator") 
 				//o1 is left-associative and its precedence is less than or equal to that of o2, or
 				&& ((v.associativity() === "left" && v.precedence() <= opStack.peek().precedence())
 					//o1 is right associative, and has precedence less than that of o2,
 					|| (v.associativity() === "right" && v.precedence() < opStack.peek().precedence()))) {
-			  	outStack.addNode(opStack.pop());
+				outStack.addNode(opStack.pop());
 			}
 			//at the end of iteration push o1 onto the operator stack
 			opStack.push(v);
 		} 
-		
+
 		//If the token is a left parenthesis (i.e. "("), then push it onto the stack.
 		else if(v.type === "Left Parenthesis") {
 			opStack.push(v);
@@ -96,7 +131,7 @@ function parse(inp){
 			while(opStack.peek() 
 				&& opStack.peek().type !== "Left Parenthesis") {
 				outStack.addNode(opStack.pop());
-		}
+			}
 			/*if(opStack.length == 0){
 				console.log("Unmatched parentheses");
 				return;
@@ -118,5 +153,6 @@ function parse(inp){
 	return outStack.pop();
 }
 module.exports = {
-	process: parse
+	process: parse,
+	calculate: calculate 
 }
