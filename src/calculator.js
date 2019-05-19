@@ -1,8 +1,20 @@
 'use strict'
-const tokenizer = require('./tokenizer.js');
-const rpn = require('./rpn.js');
-const ast = require('./ast.js');
-console.log('..calculating..');
+
+/**
+ * A shared code base for both web and cli interfaces, presenting services to convert a stringified math expression to the following options:
+ * - rpn:				translate to RPN representation,
+ * - ast:    		build AST tree
+ * - calculate: calcualte the actual numeric sum
+ * @param {string} expr - The string which represents a math expression
+ */
+
+
+const tokenizer = require('./service/tokenizer.js');
+const rpn = require('./service/rpn.js');
+const ast = require('./service/ast.js');
+
+
+console.log('___Calculator result:___');
 
 var calculator = {
 	/**
@@ -10,7 +22,7 @@ var calculator = {
 	 *
 	 * We assume that the expression is a sequence of number and math operators
 	 *
-	 * @param {string} expr - The string which represents a math expression 
+	 * @param {string} expr - The string which represents a math expression
 	 * @return {string} The expression's result
 	 */
 	tokenize: function(expr){
@@ -25,9 +37,6 @@ var calculator = {
 	calculate: function(expr){
 		return ast.calculate(expr);
 	}
-
-
-
 }
 
 module.exports=calculator;

@@ -1,5 +1,8 @@
 'use strict'
-
+/**
+ * Tokenizer module:
+ * A module to build an array based on a predefined type of symbols
+ */
 
 function Token(type, value) {
 	this.type = type;

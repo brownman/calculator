@@ -1,56 +1,20 @@
 'use strict'
+/**
+ * RPN module:
+ * A module to build an RPN expression from a stringified math expression.
+ */
 
 var tokenizer = require('./tokenizer.js');
-var Token = tokenizer.Token;
-
-function ASTNode(token, leftChildNode, rightChildNode) {
-	this.token = token.value;
-	this.leftChildNode = leftChildNode;
-	this.rightChildNode = rightChildNode;
-}
-
-ASTNode.prototype.toString = function(count) {
-	if (!this.leftChildNode && !this.rightChildNode)
-		return this.token + "\t=>null\n" + Array(count+1).join("\t") + "=>null";
-	var count = count || 1;
-	count++;
-	return this.token + "\t=>" + this.leftChildNode.toString(count) + "\n" + Array(count).join("\t") + "=>" + this.rightChildNode.toString(count);
-};
-
-function travel(inp){
-	//console.log(inp);
-	if (inp == null || typeof inp === undefined)
-		return inp;
-
-	if (inp && inp.leftChildNode == null && inp.rightChildNode == null) 
-		return Number(inp.token);
-
-	switch(inp.token) {
-		case '*':
-			return travel(inp.leftChildNode) * travel(inp.rightChildNode);
-		case '/':
-			return travel(inp.leftChildNode) - travel(inp.rightChildNode);
-		default:
-			return null;
-	} 
-}
 
 
-function calculate(inp){
-	var ast_tree = parse(inp);
-	var res = travel(ast_tree);
-	return res;
-}
 
-function parse(inp){
-	var outStack=[];
+function process(inp){
+	var Token  = tokenizer.Token;
+
+	var outQueue=[];
 	var opStack=[];
-
-	Array.prototype.addNode = function (operatorToken) {
-		var rightChildNode = this.pop();
-		var leftChildNode = this.pop();
-		this.push(new ASTNode(operatorToken, leftChildNode, rightChildNode));
-	}
+	//this.Token = Object.create();
+	//Token.prototype = {};
 
 	Array.prototype.peek = function() {
 		return this.slice(-1)[0];
@@ -84,39 +48,39 @@ function parse(inp){
 	var tokens=tokenizer.process(inp);
 
 	tokens.forEach(function(v) {
-		//If the token is a number, then push it to the output stack
+		//If the token is a number, then push it to the output queue
 		if(v.type === "Literal" || v.type === "Variable" ) {
-			outStack.push(new ASTNode(v, null, null));
-		} 
+			outQueue.push(v);
+		}
 		//If the token is a function token, then push it onto the stack.
 		else if(v.type === "Function") {
 			opStack.push(v);
-		} //If the token is a function argument separator 
+		} //If the token is a function argument separator
 		else if(v.type === "Function Argument Separator") {
 			//Until the token at the top of the stack is a left parenthesis
 			//pop operators off the stack onto the output queue.
 			while(opStack.peek()
 				&& opStack.peek().type !== "Left Parenthesis") {
-				outStack.addNode(opStack.pop());
-			}
+				outQueue.push(opStack.pop());
+		}
 			/*if(opStack.length == 0){
 				console.log("Mismatched parentheses");
 				return;
 			}*/
-		} 
+		}
 		//If the token is an operator, o1, then:
 		else if(v.type == "Operator") {
-			//while there is an operator token o2, at the top of the operator stack and either
-			while (opStack.peek() && (opStack.peek().type === "Operator") 
+			  //while there is an operator token o2, at the top of the operator stack and either
+			  while (opStack.peek() && (opStack.peek().type === "Operator")
 				//o1 is left-associative and its precedence is less than or equal to that of o2, or
 				&& ((v.associativity() === "left" && v.precedence() <= opStack.peek().precedence())
 					//o1 is right associative, and has precedence less than that of o2,
 					|| (v.associativity() === "right" && v.precedence() < opStack.peek().precedence()))) {
-				outStack.addNode(opStack.pop());
+			  	outQueue.push(opStack.pop());
 			}
 			//at the end of iteration push o1 onto the operator stack
 			opStack.push(v);
-		} 
+		}
 
 		//If the token is a left parenthesis (i.e. "("), then push it onto the stack.
 		else if(v.type === "Left Parenthesis") {
@@ -125,10 +89,10 @@ function parse(inp){
 		//If the token is a right parenthesis (i.e. ")"):
 		else if(v.type === "Right Parenthesis") {
 			//Until the token at the top of the stack is a left parenthesis, pop operators off the stack onto the output queue.
-			while(opStack.peek() 
+			while(opStack.peek()
 				&& opStack.peek().type !== "Left Parenthesis") {
-				outStack.addNode(opStack.pop());
-			}
+				outQueue.push(opStack.pop());
+		}
 			/*if(opStack.length == 0){
 				console.log("Unmatched parentheses");
 				return;
@@ -138,18 +102,19 @@ function parse(inp){
 
 			//If the token at the top of the stack is a function token, pop it onto the output queue.
 			if(opStack.peek() && opStack.peek().type === "Function") {
-				outStack.addNode(opStack.pop());
+				outQueue.push(opStack.pop());
 			}
 		}
 	});
 
-	while(opStack.peek()) {
-		outStack.addNode(opStack.pop());
-	}
+	return extract_values(outQueue.concat(opStack.reverse()));
+}
 
-	return outStack.pop();
+function extract_values(rpn) {
+	return rpn.map(token => token.value).join(" ");
 }
-module.exports = {
-	process: parse,
-	calculate: calculate 
+var rpn = {
+	extract_values: extract_values,
+	process: process
 }
+module.exports=rpn;

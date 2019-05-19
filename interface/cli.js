@@ -1,5 +1,8 @@
 'use strict'
-
+/**
+ * A command-line interface for serving a math calculation service for a givven user input.
+ * A valid input is a stringified math expression.
+ */
 const calc=require('../src/calculator.js');
 
 require('yargs')
@@ -46,7 +49,8 @@ require('yargs')
 		})
 	}, function (argv) {
 		var sum=calc.calculate(argv.expression);
-		console.log(sum);
+		console.log('Input:\t' + argv.expression);
+		console.log('Result:\t' + sum);
 	})
 
 
@@ -54,4 +58,3 @@ require('yargs')
 
 	.help()
 	.argv
-
