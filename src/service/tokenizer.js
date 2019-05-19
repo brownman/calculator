@@ -43,6 +43,7 @@ function process(str) {
 	var letterBuffer=[];
 	var numberBuffer=[];
 
+
 	str.forEach(function (char, idx) {
 		if(isDigit(char)) {
 			numberBuffer.push(char);
@@ -75,6 +76,9 @@ function process(str) {
 			emptyNumberBufferAsLiteral();
 			emptyLetterBufferAsVariables();
 			result.push(new Token("Function Argument Separator", char));
+		} else {
+		//	result = null;
+			return null;
 		}
 	});
 	if (numberBuffer.length) {
@@ -89,19 +93,19 @@ function process(str) {
 		var l = letterBuffer.length;
 		for (var i = 0; i < l; i++) {
 			result.push(new Token("Variable", letterBuffer[i]));
-          if(i< l-1) { //there are more Variables left
-          	result.push(new Token("Operator", "*"));
-          }
-      }
-      letterBuffer = [];
-  }
+			if(i< l-1) { //there are more Variables left
+				result.push(new Token("Operator", "*"));
+			}
+		}
+		letterBuffer = [];
+	}
 
-  function emptyNumberBufferAsLiteral() {
-  	if(numberBuffer.length) {
-  		result.push(new Token("Literal", numberBuffer.join("")));
-  		numberBuffer=[];
-  	}
-  }
+	function emptyNumberBufferAsLiteral() {
+		if(numberBuffer.length) {
+			result.push(new Token("Literal", numberBuffer.join("")));
+			numberBuffer=[];
+		}
+	}
 
 }
 

@@ -44,12 +44,12 @@ function travel(inp){
 
 
 function calculate(inp){
-	var ast_tree = parse(inp);
+	var ast_tree = process(inp);
 	var res = travel(ast_tree);
 	return res;
 }
 
-function parse(inp){
+function process(inp){
 	var outStack=[];
 	var opStack=[];
 
@@ -89,6 +89,12 @@ function parse(inp){
 
 	//tokenize
 	var tokens=tokenizer.process(inp);
+	if (tokens == null)
+	{
+		console.error('tokenizer result: null');
+		return null;
+	}
+
 
 	tokens.forEach(function(v) {
 		//If the token is a number, then push it to the output stack
@@ -157,6 +163,6 @@ function parse(inp){
 	return outStack.pop();
 }
 module.exports = {
-	process: parse,
+	process: process,
 	calculate: calculate
 }
