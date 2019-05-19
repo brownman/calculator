@@ -2,6 +2,26 @@ calculator
 ---
 - evaluate string expression as math expression.
 
+TODO
+----
+- input validation: 
+1. whitelisted symbols
+2. allowed range
+
+- test input range: 
+1. max/min range of input 
+2. max/min range of output
+
+- output sanitation:
+1. disable error tracing
+2. on error: show general message
+
+
+NICE TO HAVE:
+---
+- docker 
+- travis integration
+
 USE
 ------
 - cli interface: npm run cli:help
